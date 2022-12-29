@@ -1,0 +1,116 @@
+openapi: 3.0.2
+info:
+    title: This is a test OpenAPI definition document to manage Books.
+    version: 1.0.0
+paths:
+    /books:
+        get:
+            description: This operation is to retrieve all the books.
+            responses:
+                200:
+                    description: A list of all the books.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Book"
+                500:
+                    $ref: "#/components/responses/500ApiError"
+    /book:
+        get:
+            parameters:
+                - $ref: '#/components/parameters/bookId'
+            description: This operation retrieves one specific book, based on the bookId provided.
+            responses:
+                200:
+                    description: A book.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Book"
+                500:
+                    $ref: "#/components/responses/500ApiError"
+        post:
+            description: This operation creates a new book.
+            requestBody: 
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Book"
+            responses:
+                200:
+                    description: The book has been created.
+                500:
+                    $ref: "#/components/responses/500ApiError"
+    /bookTitle/{bookTitle}:
+        get:
+            parameters:
+                - $ref: '#/components/parameters/bookTitle'
+                - $ref: '#/components/parameters/book-security-header'
+            description: This operation retrieves a book based on the Title provided.
+            responses:
+                200:
+                    description: A book according to the provided title.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Book"
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Book'
+                500:
+                    $ref: "#/components/responses/500ApiError"
+components:
+    parameters:
+        bookId:
+            in: query
+            name: bookId
+            description: This is the book id that will be returned.
+            required: true
+            schema:
+                type: integer
+                example: 1
+                maximum: 100
+        bookTitle:
+            in: path
+            name: bookTitle
+            description: This is an operation that will return a book based on the Title.
+            required: true
+            schema:
+                type: string
+                example: IT
+        book-security-header:
+            in: header
+            name: book-security-header
+            required: false
+            schema:
+                type: integer
+                example: 123-123-123
+    schemas:
+        Book:
+            type: object
+            required:
+                - bookName
+            properties:
+                bookId:
+                    type: integer
+                    example: 1
+                bookName:
+                    type: string
+                    example: IT
+                bookPlot:
+                    type: string
+                    example: This is a story of a clown.
+    responses:
+        500ApiError:
+            description: This is an unexpected error.
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        properties:
+                            statusCode:
+                                type: string
+                                example: 500
+                            message:
+                                type: string
+                                example: This is a 500 error.
