@@ -14,7 +14,7 @@ npm install  -g http-server
 ```
 - You can download the following [VSCode extention](https://marketplace.visualstudio.com/items?itemName=42Crunch.vscode-openapi)
 
-## Books Swagger
+# Books Swagger
 This is an API that provides different operations to manage a Book such as:
 - Getting all books
 - Getting an specific book
@@ -43,3 +43,19 @@ These two sections have additional information about the API like external links
 
 #### Components
 This has a set of reusable objects that can be used in different parts of the API.
+
+# SwaggerHub
+
+## Advanced Capabilities
+- Domains provide object reusability across APIs
+- API management capabilities such as security, versioning, and source control integration
+- API definition and documentation hosting
+- API mocking and virtualization
+- Swagger Editor enhancement
+
+## Benefits
+- Promotes consistent API design across organizations and teams
+- Eases collaboration amongs API developers
+- Reduces time and effort required to design APIs
+- Supports parallel development via contract-first approach
+- 
